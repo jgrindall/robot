@@ -1,5 +1,8 @@
 //https://blog.bitsrc.io/why-and-how-use-typescript-in-your-react-app-60e8987be8de
 import * as React from 'react';
+import AceEditor from "react-ace";
+import "ace-builds/src-noconflict/mode-java";
+import "ace-builds/src-noconflict/theme-xcode";
 
 const code = 'import mynewmodule.func\nprint("imported")\nr=mynewmodule.func.Stack(4)\nr.push(10)\nr.push(20)\nr2=r.push2()\nprint(r2)\ns1=r.tostr()\nprint(s1)\na= mynewmodule.func.fact(10)\nprint(a)\nprint("done")';
 
@@ -66,8 +69,7 @@ const runit = ()=>{
 class CodeComp extends React.Component {
   constructor(props) {
       super(props);
-      this.state = {isToggleOn: true};
-      this.handleClick = this.handleClick.bind(this);
+      this.state = {code: code};
     }
 
 
@@ -75,14 +77,35 @@ class CodeComp extends React.Component {
         runit();
     }
 
+    onChange(newValue) {
+     console.log("change", newValue);
+     this.setState(state => ({ code: newValue }));
+   }
 
     render() {
       return <div>
-            <form>
-                <textarea id="yourcode" cols="40" rows="10" defaultValue={code}></textarea>
-                <br />
-                <button type="button" onClick={this.handleClick}>Run</button>
-            </form>
+            <button type="button" onClick={this.handleClick.bind(this)}>Run</button>
+
+            <AceEditor
+              mode="python"
+              theme="xcode"
+              onChange={this.onChange.bind(this)}
+              name="UNIQUE_ID_OF_DIV"
+              fontSize={14}
+              showPrintMargin={true}
+              showGutter={true}
+              highlightActiveLine={true}
+              value={this.state.code}
+              editorProps={{ $blockScrolling: true }}
+              setOptions={{
+                enableBasicAutocompletion: false,
+                enableLiveAutocompletion: false,
+                enableSnippets: false,
+                showLineNumbers: true,
+                tabSize: 2
+              }}
+            />
+
             <pre id="output" ></pre>
         </div>;
     }
