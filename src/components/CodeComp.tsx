@@ -1,7 +1,7 @@
 //https://blog.bitsrc.io/why-and-how-use-typescript-in-your-react-app-60e8987be8de
 import * as React from 'react';
 
-const code = "print(1)";
+const code = 'import mynewmodule.func\nprint("imported")\nr=mynewmodule.func.Stack(4)\nr.push(10)\nr.push(20)\nr2=r.push2()\nprint(r2)\ns1=r.tostr()\nprint(s1)\na= mynewmodule.func.fact(10)\nprint(a)\nprint("done")';
 
 function outf(text) {
     var mypre = document.getElementById("output");
@@ -20,6 +20,30 @@ Sk.configure({
   read: builtinRead,
   __future__: Sk.python3
 });
+
+class RobotObject{
+  constructor(params){
+    this.stack = [];
+  }
+  push(v){
+    this.stack.push(v);
+  }
+  toString2(){
+    return "apple";
+  },
+  toString(){
+    return JSON.stringify(this.stack);
+  }
+  move(){
+
+  }
+}
+
+Sk.__robot__ = {
+  make:function(params){
+    return new RobotObject(params);
+  }
+};
 
 const runit = ()=>{
    var prog = document.getElementById("yourcode").value;
