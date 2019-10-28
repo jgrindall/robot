@@ -6,6 +6,7 @@ class Game {
     private _scene: BABYLON.Scene;
     private _camera: BABYLON.FreeCamera;
     private _light: BABYLON.Light;
+    public sphere: BABYLON.Mesh;
 
     constructor(canvasElement : string) {
         // Create canvas and engine.
@@ -30,11 +31,11 @@ class Game {
         this._light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0,1,0), this._scene);
 
         // Create a built-in "sphere" shape; with 16 segments and diameter of 2.
-        let sphere = BABYLON.MeshBuilder.CreateSphere('sphere1',
+        this.sphere = BABYLON.MeshBuilder.CreateSphere('sphere1',
                                 {segments: 16, diameter: 2}, this._scene);
 
         // Move the sphere upward 1/2 of its height.
-        sphere.position.y = 1;
+        this.sphere.position.y = 1;
 
         // Create a built-in "ground" shape.
         let ground = BABYLON.MeshBuilder.CreateGround('ground1',

@@ -27,8 +27,15 @@ Sk.configure({
 class RobotObject{
   constructor(params){
     this.stack = [];
+    this.sphere = window.sphere;
   }
   push(v){
+      //this.sphere.position.x += 10;
+      setInterval(()=>{
+        this.sphere.position.x += 0.001;
+        this.sphere.position.y += 0.001;
+
+      });
     this.stack.push(v);
   }
   toString2(){
@@ -48,12 +55,16 @@ Sk.__robot__ = {
   }
 };
 
-const runit = ()=>{
-   var prog = document.getElementById("yourcode").value;
+Sk.robotProxy = {
+  move(){
+
+  }
+};
+
+const runit = (prog)=>{
    var mypre = document.getElementById("output");
    mypre.innerHTML = '';
    var myPromise = Sk.misceval.asyncToPromise(function() {
-       debugger;
        console.log(prog);
        return Sk.importMainWithBody("<stdin>", false, prog, true);
    });
@@ -74,7 +85,7 @@ class CodeComp extends React.Component {
 
 
     handleClick() {
-        runit();
+        runit(this.state.code);
     }
 
     onChange(newValue) {
