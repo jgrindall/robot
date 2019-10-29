@@ -21,7 +21,6 @@ window.addEventListener('DOMContentLoaded', () => {
     const gameObjectMaker:GameObjectMaker = new GameObjectMaker(meshMaker, scene);
     const gameManager:GameManager = new GameManager(game, gameObjectMaker);
     window.go = gameManager.add("1234");
-    alert(window.go);
 });
 
 
