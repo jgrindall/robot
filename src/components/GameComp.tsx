@@ -1,6 +1,9 @@
 //https://blog.bitsrc.io/why-and-how-use-typescript-in-your-react-app-60e8987be8de
 import * as React from 'react';
 import Game from "../babylon/game.ts";
+import GameManager from "../babylon/GameManager";
+import GameObjectMaker from '../babylon/GameObjectMaker';
+import MeshMaker from "../babylon/MeshMaker";
 
 class GameComp extends React.Component {
   render() {
@@ -10,16 +13,15 @@ class GameComp extends React.Component {
 
 
 window.addEventListener('DOMContentLoaded', () => {
-    // Create the game using the 'renderCanvas'.
     let game = new Game('renderCanvas');
-
-
-    // Create the scene.
     game.createScene();
-
-    // Start render loop.
     game.doRender();
-    window.sphere = game.sphere;
+    const scene = game.getScene();
+    const meshMaker:MeshMaker = new MeshMaker(scene);
+    const gameObjectMaker:GameObjectMaker = new GameObjectMaker(meshMaker, scene);
+    const gameManager:GameManager = new GameManager(game, gameObjectMaker);
+    window.go = gameManager.add("1234");
+    alert(window.go);
 });
 
 

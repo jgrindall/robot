@@ -27,14 +27,11 @@ Sk.configure({
 class RobotObject{
   constructor(params){
     this.stack = [];
-    this.sphere = window.sphere;
+    this.sphereGO = window.go;
   }
   push(v){
-      //this.sphere.position.x += 10;
       setInterval(()=>{
-        this.sphere.position.x += 0.001;
-        this.sphere.position.y += 0.001;
-
+        this.sphereGO.setPosition();
       });
     this.stack.push(v);
   }
@@ -83,6 +80,10 @@ class CodeComp extends React.Component {
       this.state = {code: code};
     }
 
+    handleStop(){
+
+    }
+
 
     handleClick() {
         runit(this.state.code);
@@ -95,7 +96,10 @@ class CodeComp extends React.Component {
 
     render() {
       return <div>
+
             <button type="button" onClick={this.handleClick.bind(this)}>Run</button>
+            <button type="button" onClick={this.handleStop.bind(this)}>Stop</button>
+
 
             <AceEditor
               mode="python"
