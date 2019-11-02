@@ -1,3 +1,4 @@
+
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './index.css';
@@ -21,10 +22,6 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
-
-//Hot Module Replacement
 if (module.hot) {
   module.hot.accept();
 }
-
-  //this.state = {code: code};
