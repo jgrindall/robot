@@ -1397,6 +1397,3 @@
   exports.ECSY = ECSY;
 
 })(window);
-
-
-console.log(window.ECSY)

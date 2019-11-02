@@ -44,6 +44,7 @@ const TIMER_TIME = 1;
 
 export class PulsatingColorSystem extends ECSY.System {
   execute(delta, time) {
+    return;
     time *= 1000;
     let entities = this.queries.entities.results;
     for (let i = 0; i < entities.length; i++) {
