@@ -22,10 +22,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const entityMaker:GameEntityMaker = new GameEntityMaker(meshMaker, world);
     const gameManager:GameManager = new GameManager(entityMaker);
     gameManager.addGround();
-    for (var i = 0;i < 1000; i++) {
-        gameManager.addBox(i);
-    }
-      window.go = gameManager.addBlob("1234");
+    window.gameManager = gameManager;
 });
 
 

@@ -1,11 +1,9 @@
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import './index.css';
 import GameComp from './components/GameComp';
 import CodeComp from './components/CodeComp';
-
-const logo = require('./logo.svg');
+import './index.css';
 
 class App extends React.Component {
   constructor() {
@@ -13,8 +11,7 @@ class App extends React.Component {
     }
     render() {
       return   <div className="App">
-          <img className="App-logo" src={logo} alt="React" />
-          <h1 className="App-Title">Hello Parcel React TypeScript</h1>
+          <p className="App-Title">Title</p>
           <GameComp />
           <CodeComp />
         </div>
@@ -22,6 +19,7 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
+
 if (module.hot) {
   module.hot.accept();
 }

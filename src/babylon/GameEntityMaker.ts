@@ -32,7 +32,7 @@ class GameEntityMaker {
     makeBox(i){
       var entity = this._world.createEntity();
       var mesh = this._meshMaker.makeBox();
-      mesh.position.copyFrom(randomSpherePoint(2));
+      mesh.position.copyFrom(randomSpherePoint(4));
       entity.addComponent(Object3D, {object: mesh});
       entity.addComponent(PulsatingScale, {offset: i});
       if (Math.random() > 0.5) {

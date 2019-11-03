@@ -4,7 +4,7 @@ import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/theme-xcode";
 
-const code = 'import mynewmodule.func\nprint("imported")\nr=mynewmodule.func.Stack(4)\nr.push(10)\nr.push(20)\nr2=r.push2()\nprint(r2)\ns1=r.tostr()\nprint(s1)\na= mynewmodule.func.fact(10)\nprint(a)\nprint("done")';
+const code = 'import mynewmodule.func\nprint("imported")\nfor i in range(0,100):\n  a = mynewmodule.func.Box(i)\nblob = mynewmodule.func.Blob()\nblob.move()\nr=mynewmodule.func.Stack(4)\nr.push(10)\nr.push(20)\nprint(r)\nprint(r.tostr())\na=mynewmodule.func.fact(10)\nprint(a)\nprint("done")';
 
 function outf(text) {
     var mypre = document.getElementById("output");
@@ -24,37 +24,12 @@ Sk.configure({
   __future__: Sk.python3
 });
 
-class RobotObject{
-  constructor(params){
-    this.stack = [];
-    this.sphereGO = window.go;
-  }
-  push(v){
-      setInterval(()=>{
-        this.sphereGO.setPosition();
-      });
-    this.stack.push(v);
-  }
-  toString2(){
-    return "apple";
+Sk.__maker__ = {
+  makeBlob:function(params){
+    return gameManager.addBlob("1234");
   },
-  toString(){
-    return JSON.stringify(this.stack);
-  }
-  move(){
-
-  }
-}
-
-Sk.__robot__ = {
-  make:function(params){
-    return new RobotObject(params);
-  }
-};
-
-Sk.robotProxy = {
-  move(){
-
+  makeBox:function(params){
+    return gameManager.addBox(params);
   }
 };
 
@@ -62,7 +37,6 @@ const runit = (prog)=>{
    var mypre = document.getElementById("output");
    mypre.innerHTML = '';
    var myPromise = Sk.misceval.asyncToPromise(function() {
-       console.log(prog);
        return Sk.importMainWithBody("<stdin>", false, prog, true);
    });
    myPromise.then(

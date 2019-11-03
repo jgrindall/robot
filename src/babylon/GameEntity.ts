@@ -15,6 +15,10 @@ class GameEntity {
     updateProp() : void {
 
     }
+    move(){
+      const mesh = this._entity.getComponent(Object3D).object;
+      mesh.scaling.x = 2;
+    }
     getMesh():Mesh{
       return this._entity.getComponent(Object3D).object;
     }
