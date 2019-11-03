@@ -16,6 +16,13 @@ class GameManager {
     addGround(){
       return this._entityMaker.makeGround();
     }
+    destroyAll(){
+      
+    }
+    removeEntity(entity){
+
+      entity.remove(true);
+    }
 }
 
 export default GameManager;
