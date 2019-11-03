@@ -11,9 +11,9 @@ class App extends React.Component {
     }
     render() {
       return   <div className="App">
-          <p className="App-Title">Title</p>
-          <GameComp />
-          <CodeComp />
+          <p className="app-title">Title</p>
+          <GameComp className="game-comp"/>
+          <CodeComp className="code-comp"/>
         </div>
     }
 }
