@@ -13,14 +13,6 @@ import {
   Rotating
 } from "./components.js";
 
-
-class Something {
-
-}
-const s = new Something();
-
-console.log(ECSY, ECSY.System);
-
 export class RotatingSystem extends ECSY.System {
   execute(delta) {
     let entities = this.queries.entities.results;
