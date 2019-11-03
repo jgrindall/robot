@@ -1,20 +1,20 @@
-import * as BABYLON from 'babylonjs';
-import Game from './Game';
-import GameObjectMaker from './GameObjectMaker';
-import GameObject from './GameObject';
+import GameEntityMaker from './GameEntityMaker';
+import GameEntity from './GameEntity';
 
 class GameManager {
-    private _game: Game;
-    private _gameObjectMaker: GameObjectMaker;
+    private _entityMaker:GameEntityMaker;
 
-    constructor(game:Game, gameObjectMaker:GameObjectMaker) {
-      this._game = game;
-      this._gameObjectMaker = gameObjectMaker;
+    constructor(entityMaker:GameEntityMaker) {
+      this._entityMaker = entityMaker;
     }
-
-    add(defn:string):void{
-      const gameObj:GameObject = this._gameObjectMaker.make(defn);
-      return gameObj;
+    addBlob(defn:string):GameEntity{
+      return this._entityMaker.makeBlob(defn);
+    }
+    addBox(i){
+      return this._entityMaker.makeBox(i);
+    }
+    addGround(){
+      return this._entityMaker.makeGround();
     }
 }
 

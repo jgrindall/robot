@@ -1,7 +1,7 @@
 //https://blog.bitsrc.io/why-and-how-use-typescript-in-your-react-app-60e8987be8de
 import * as React from 'react';
 import AceEditor from "react-ace";
-import "ace-builds/src-noconflict/mode-java";
+import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/theme-xcode";
 
 const code = 'import mynewmodule.func\nprint("imported")\nr=mynewmodule.func.Stack(4)\nr.push(10)\nr.push(20)\nr2=r.push2()\nprint(r2)\ns1=r.tostr()\nprint(s1)\na= mynewmodule.func.fact(10)\nprint(a)\nprint("done")';

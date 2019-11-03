@@ -23,12 +23,6 @@ export class Timeout {
   }
 }
 
-export class PulsatingColor {
-  constructor() {
-    this.offset = 0;
-  }
-}
-
 export class Colliding {
   constructor() {
     this.value = false;

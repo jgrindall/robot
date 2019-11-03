@@ -2,7 +2,7 @@
 import * as React from 'react';
 import Game from "../babylon/game.ts";
 import GameManager from "../babylon/GameManager";
-import GameObjectMaker from '../babylon/GameObjectMaker';
+import GameEntityMaker from '../babylon/GameEntityMaker';
 import MeshMaker from "../babylon/MeshMaker";
 
 class GameComp extends React.Component {
@@ -17,10 +17,15 @@ window.addEventListener('DOMContentLoaded', () => {
     game.createScene();
     game.doRender();
     const scene = game.getScene();
+    const world = game.getWorld();
     const meshMaker:MeshMaker = new MeshMaker(scene);
-    const gameObjectMaker:GameObjectMaker = new GameObjectMaker(meshMaker, scene);
-    const gameManager:GameManager = new GameManager(game, gameObjectMaker);
-    window.go = gameManager.add("1234");
+    const entityMaker:GameEntityMaker = new GameEntityMaker(meshMaker, world);
+    const gameManager:GameManager = new GameManager(entityMaker);
+    gameManager.addGround();
+    for (var i = 0;i < 1000; i++) {
+        gameManager.addBox(i);
+    }
+      window.go = gameManager.addBlob("1234");
 });
 
 
