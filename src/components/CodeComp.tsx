@@ -21,24 +21,46 @@ function builtinRead(x) {
 Sk.configure({
   output: outf,
   read: builtinRead,
+  debugging: true,
   __future__: Sk.python3
 });
 
 Sk.__maker__ = {
   makeBlob:function(params){
-    return gameManager.addBlob("1234");
+    return window.gameManager.addBlob("1234");
   },
   makeBox:function(params){
-    return gameManager.addBox(params);
+    return window.gameManager.addBox(params);
   }
 };
 
+Sk.builtin.KeyboardInterrupt = function (args) {
+    var o;
+    if (!(this instanceof Sk.builtin.KeyboardInterrupt)) {
+        o = Object.create(Sk.builtin.KeyboardInterrupt.prototype);
+        o.constructor.apply(o, arguments);
+        return o;
+    }
+    Sk.builtin.BaseException.apply(this, arguments);
+};
+Sk.abstr.setUpInheritance("KeyboardInterrupt", Sk.builtin.KeyboardInterrupt, Sk.builtin.BaseException);
+
+const interruptHandler = function (susp) {
+   if (Sk.hardInterrupt === true) {
+       throw new Sk.builtin.KeyboardInterrupt('aborted execution');
+   }
+   else {
+       return null; // should perform default action
+   }
+};
+
 const runit = (prog)=>{
-   var mypre = document.getElementById("output");
+   const mypre = document.getElementById("output");
    mypre.innerHTML = '';
-   var myPromise = Sk.misceval.asyncToPromise(function() {
+   const susp = {"*": interruptHandler};
+   var myPromise = Sk.misceval.asyncToPromise(() => {
        return Sk.importMainWithBody("<stdin>", false, prog, true);
-   });
+   }, susp);
    myPromise.then(
      function(mod) {
        console.log('success');
@@ -49,13 +71,14 @@ const runit = (prog)=>{
 };
 
 class CodeComp extends React.Component {
-  constructor(props) {
+    constructor(props) {
       super(props);
       this.state = {code: code};
     }
 
     handleStop(){
-
+      Sk.hardInterrupt = true;
+      window.gameManager.destroyAll();
     }
 
 
