@@ -12,6 +12,9 @@ class GameEntity {
       //mesh.position.x += 0.001;
       //mesh.position.y += 0.001;
     }
+    remove(){
+      return this._entity.remove();
+    }
     updateProp() : void {
 
     }

@@ -3,8 +3,9 @@ import * as React from 'react';
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/theme-xcode";
+import _ from 'underscore';
 
-const code = 'import mynewmodule.func\nprint("imported")\nfor i in range(0,100):\n  a = mynewmodule.func.Box(i)\nblob = mynewmodule.func.Blob()\nblob.move()\nr=mynewmodule.func.Stack(4)\nr.push(10)\nr.push(20)\nprint(r)\nprint(r.tostr())\na=mynewmodule.func.fact(10)\nprint(a)\nprint("done")';
+const code = 'import mynewmodule.func\nprint("imported")\nfor i in range(0,100):\n  a = mynewmodule.func.Box(i)\nso = mynewmodule.func.SleepyObj()\nso.move()\nblob = mynewmodule.func.Blob()\nblob.move()\nr=mynewmodule.func.Stack(4)\nr.push(10)\nr.push(20)\nprint(r)\nprint(r.tostr())\na=mynewmodule.func.fact(10)\nprint(a)\nprint("done")';
 
 function outf(text) {
     var mypre = document.getElementById("output");
@@ -18,11 +19,28 @@ function builtinRead(x) {
     return Sk.builtinFiles["files"][x];
 }
 
+const timeouts = [];
+
+const clearTimeouts = ()=>{
+  _.each(timeouts, timeout=>{
+    clearTimeout(timeout);
+  });
+};
+
 Sk.configure({
   output: outf,
   read: builtinRead,
   debugging: true,
-  __future__: Sk.python3
+  __future__: Sk.python3,
+  setTimeout: (fn, delay) => {
+      const timeout = setTimeout(() => {
+          if(!Sk.hardInterrupt){
+            fn();
+        }
+      }, delay);
+      timeouts.push(timeout);
+      console.log(timeouts.length, 'to');
+  }
 });
 
 Sk.__maker__ = {
@@ -46,7 +64,7 @@ Sk.builtin.KeyboardInterrupt = function (args) {
 Sk.abstr.setUpInheritance("KeyboardInterrupt", Sk.builtin.KeyboardInterrupt, Sk.builtin.BaseException);
 
 const interruptHandler = function (susp) {
-   if (Sk.hardInterrupt === true) {
+   if (Sk.hardInterrupt) {
        throw new Sk.builtin.KeyboardInterrupt('aborted execution');
    }
    else {
@@ -67,6 +85,10 @@ const runit = (prog)=>{
      },
      function(err) {
        console.log(err);
+       if(err instanceof Sk.builtin.KeyboardInterrupt){
+         alert('kill');
+
+       }
     });
 };
 
@@ -77,17 +99,18 @@ class CodeComp extends React.Component {
     }
 
     handleStop(){
+      clearTimeouts();
       Sk.hardInterrupt = true;
       window.gameManager.destroyAll();
     }
 
 
     handleClick() {
+      Sk.hardInterrupt = false;
         runit(this.state.code);
     }
 
     onChange(newValue) {
-     console.log("change", newValue);
      this.setState(state => ({ code: newValue }));
    }
 

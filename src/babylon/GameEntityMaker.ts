@@ -23,6 +23,9 @@ class GameEntityMaker {
       this._meshMaker = meshMaker;
       this._world = world;
     }
+    getWorld(){
+      return this._world;
+    }
     makeGround(){
       const mesh = this._meshMaker.makeGround('ground');
       const entity = this._world.createEntity();
@@ -36,9 +39,9 @@ class GameEntityMaker {
       entity.addComponent(Object3D, {object: mesh});
       entity.addComponent(PulsatingScale, {offset: i});
       if (Math.random() > 0.5) {
-        entity.addComponent(Moving, {offset: i});
+        //entity.addComponent(Moving, {offset: i});
       }
-      entity.addComponent(Collisionable);
+      //entity.addComponent(Collisionable);
       return new GameEntity(entity);
     }
     makeBlob(){
@@ -48,7 +51,7 @@ class GameEntityMaker {
       mesh.material = material;
       const radius = 2;
       const entity = this._world.createEntity();
-      entity.addComponent(Collider);
+      //entity.addComponent(Collider);
       entity.addComponent(Object3D, {object: mesh});
       entity.addComponent(Rotating, {rotatingSpeed: 0.5});
       mesh.setPivotMatrix(BABYLON.Matrix.Translation(0, 0, radius), false);

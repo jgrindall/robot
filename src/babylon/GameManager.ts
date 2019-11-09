@@ -1,27 +1,34 @@
 import GameEntityMaker from './GameEntityMaker';
 import GameEntity from './GameEntity';
+import _ from 'underscore';
 
 class GameManager {
-    private _entityMaker:GameEntityMaker;
+    private _entityMaker:GameEntityMaker
+    private _entities = []
 
     constructor(entityMaker:GameEntityMaker) {
       this._entityMaker = entityMaker;
     }
     addBlob(defn:string):GameEntity{
-      return this._entityMaker.makeBlob(defn);
+      const e = this._entityMaker.makeBlob(defn);
+      this._entities.push(e);
+      return e;
     }
     addBox(i){
-      return this._entityMaker.makeBox(i);
+      const e = this._entityMaker.makeBox(i);
+      this._entities.push(e);
+      return e;
     }
     addGround(){
-      return this._entityMaker.makeGround();
+      const e = this._entityMaker.makeGround();
+      this._entities.push(e);
+      return e;
     }
     destroyAll(){
-      
-    }
-    removeEntity(entity){
-
-      entity.remove(true);
+      while(this._entities.length >= 1){
+        const en = this._entities.pop();
+        en.remove();
+      }
     }
 }
 

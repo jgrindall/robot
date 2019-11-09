@@ -17,7 +17,8 @@
     "react-ace": "^8.0.0",
     "react-dom": "^16.2.0",
     "tslint": "^5.8.0",
-    "tslint-react": "^3.2.0"
+    "tslint-react": "^3.2.0",
+    "underscore": "^1.9.1"
   },
   "postcss": {
     "modules": false,
