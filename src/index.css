@@ -13,6 +13,11 @@ body {
   margin: 2rem auto;
 }
 
+.App canvas{
+  position: absolute;
+  left:0;
+}
+
 img {
   transition: 3s;
   height: 100px;
@@ -21,4 +26,28 @@ img {
 
 .App:hover > img {
   transform: rotate(1080deg);
+}
+
+.code{
+  width:45%;
+  position: absolute;
+  right:0;
+}
+
+.code .ace_editor{
+  background:#ccc;
+    width:50%;
+    float:left;
+    position: absolute;
+    left:0;
+    top:30px;
+}
+
+.code #output{
+  background:#686;
+  float:right;
+  width:50%;
+    position: absolute;
+    right: 0;
+    top: 30px;
 }

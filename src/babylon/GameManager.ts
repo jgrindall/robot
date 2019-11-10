@@ -9,6 +9,11 @@ class GameManager {
     constructor(entityMaker:GameEntityMaker) {
       this._entityMaker = entityMaker;
     }
+    addPig(defn){
+      const e = this._entityMaker.makePig(defn);
+      this._entities.push(e);
+      return e;
+    }
     addBlob(defn:string):GameEntity{
       const e = this._entityMaker.makeBlob(defn);
       this._entities.push(e);

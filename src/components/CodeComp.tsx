@@ -5,7 +5,7 @@ import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/theme-xcode";
 import _ from 'underscore';
 
-const code = 'import mynewmodule.func\nprint("imported")\nfor i in range(0,100):\n  a = mynewmodule.func.Box(i)\nso = mynewmodule.func.SleepyObj()\nso.move()\nblob = mynewmodule.func.Blob()\nblob.move()\nr=mynewmodule.func.Stack(4)\nr.push(10)\nr.push(20)\nprint(r)\nprint(r.tostr())\na=mynewmodule.func.fact(10)\nprint(a)\nprint("done")';
+const code = 'import mynewmodule.func\nprint("imported")\nfor i in range(0,100):\n  a = mynewmodule.func.Box(i)\npig = mynewmodule.func.Pig()\npig.move()\nso = mynewmodule.func.SleepyObj()\nso.move()\nblob = mynewmodule.func.Blob()\nblob.move()\nr=mynewmodule.func.Stack(4)\nr.push(10)\nr.push(20)\nprint(r)\nprint(r.tostr())\na=mynewmodule.func.fact(10)\nprint(a)\nprint("done")';
 
 function outf(text) {
     var mypre = document.getElementById("output");
@@ -49,6 +49,9 @@ Sk.__maker__ = {
   },
   makeBox:function(params){
     return window.gameManager.addBox(params);
+  },
+  makePig:function(params){
+    return window.gameManager.addPig(params);
   }
 };
 
@@ -115,7 +118,7 @@ class CodeComp extends React.Component {
    }
 
     render() {
-      return <div>
+      return <div className='code'>
 
             <button type="button" onClick={this.handleClick.bind(this)}>Run</button>
             <button type="button" onClick={this.handleStop.bind(this)}>Stop</button>
@@ -123,6 +126,7 @@ class CodeComp extends React.Component {
 
             <AceEditor
               mode="python"
+              id="ace-container"
               theme="xcode"
               onChange={this.onChange.bind(this)}
               name="UNIQUE_ID_OF_DIV"

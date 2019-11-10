@@ -44,17 +44,19 @@ class GameEntityMaker {
       //entity.addComponent(Collisionable);
       return new GameEntity(entity);
     }
+    makePig(){
+      const mesh = this._meshMaker.makePig('pig');
+      const entity = this._world.createEntity();
+      //entity.addComponent(Collider);
+      entity.addComponent(Object3D, {object: mesh});
+      return new GameEntity(entity);
+    }
     makeBlob(){
       const mesh = this._meshMaker.makeIso('sphere');
-      const material = new BABYLON.StandardMaterial();
-      material.diffuseColor.set(1,1,0);
-      mesh.material = material;
-      const radius = 2;
       const entity = this._world.createEntity();
       //entity.addComponent(Collider);
       entity.addComponent(Object3D, {object: mesh});
       entity.addComponent(Rotating, {rotatingSpeed: 0.5});
-      mesh.setPivotMatrix(BABYLON.Matrix.Translation(0, 0, radius), false);
       return new GameEntity(entity);
     }
 }

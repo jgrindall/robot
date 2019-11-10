@@ -1,4 +1,7 @@
 import * as BABYLON from 'babylonjs';
+import assets from '../assets/*.*');
+import numbers from '../assets/numbers.jpg';
+console.log(assets, numbers);
 
 class MeshMaker {
     private _scene:BABYLON.Scene;
@@ -19,6 +22,26 @@ class MeshMaker {
     }
     makeGround(name):BABYLON.Mesh{
       return BABYLON.MeshBuilder.CreateGround(name, {width: 6, height: 6, subdivisions: 2}, this._scene);
+    }
+    makePig(name){
+      var mat = new BABYLON.StandardMaterial("pig", this._scene);
+      console.log(assets);
+      debugger;
+      var texture = new BABYLON.Texture(numbers, this._scene);
+      mat.diffuseTexture = texture;
+      var columns = 6;
+      var rows = 1;
+      var faceUV = new Array(6);
+      for (var i = 0; i < 6; i++) {
+          faceUV[i] = new BABYLON.Vector4(i / columns, 0, (i + 1) / columns, 1 / rows);
+      }
+      var options = {
+          faceUV: faceUV,
+          wrap: true
+      };
+      var mesh = BABYLON.MeshBuilder.CreateBox('box', options, this._scene);
+      mesh.material = mat;
+      return mesh;
     }
     makeBox(name){
       if(!this._rootMesh){
