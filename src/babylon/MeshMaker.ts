@@ -25,8 +25,6 @@ class MeshMaker {
     }
     makePig(name){
       var mat = new BABYLON.StandardMaterial("pig", this._scene);
-      console.log(assets);
-      debugger;
       var texture = new BABYLON.Texture(numbers, this._scene);
       mat.diffuseTexture = texture;
       var columns = 6;

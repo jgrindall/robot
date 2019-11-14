@@ -5,7 +5,7 @@ import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/theme-xcode";
 import _ from 'underscore';
 
-const code = 'import mynewmodule.func\nprint("imported")\nfor i in range(0,100):\n  a = mynewmodule.func.Box(i)\npig = mynewmodule.func.Pig()\npig.move()\nso = mynewmodule.func.SleepyObj()\nso.move()\nblob = mynewmodule.func.Blob()\nblob.move()\nr=mynewmodule.func.Stack(4)\nr.push(10)\nr.push(20)\nprint(r)\nprint(r.tostr())\na=mynewmodule.func.fact(10)\nprint(a)\nprint("done")';
+const code = 'import mynewmodule.func\nimport mynewmodule2\nc = mynewmodule2.MyNewClass(0,3,5)\nc.setPos(100,200,300)\nprint(c)\nprint("imported")\nfor i in range(0,100):\n  a = mynewmodule.func.Box(i)\npig = mynewmodule.func.Pig()\npig.move()\nso = mynewmodule.func.SleepyObj()\nso.move()\nblob = mynewmodule.func.Blob()\nblob.move()\nr=mynewmodule.func.Stack(4)\nr.push(10)\nr.push(20)\nprint(r)\nprint(r.tostr())\na=mynewmodule.func.fact(10)\nprint(a)\nprint("done")';
 
 function outf(text) {
     var mypre = document.getElementById("output");

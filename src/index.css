@@ -51,3 +51,22 @@ img {
     right: 0;
     top: 30px;
 }
+ul.list{
+  position:absolute;
+  list-style-type: none;
+}
+
+ul.list li{
+    list-style-type: none;
+    cursor: pointer;
+    font-size:larger;
+    padding:2px;
+    padding-left:16px;
+    padding-right:16px;
+    margin:4px;
+    background:#ccc;
+}
+
+ul.list li:hover{
+  background:#444;
+}

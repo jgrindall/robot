@@ -9,25 +9,22 @@ class GameManager {
     constructor(entityMaker:GameEntityMaker) {
       this._entityMaker = entityMaker;
     }
-    addPig(defn){
-      const e = this._entityMaker.makePig(defn);
+    addUsing(fn, defn){
+      const e = fn(defn);
       this._entities.push(e);
       return e;
+    }
+    addPig(defn){
+      return this.addUsing(this._entityMaker.makePig.bind(this._entityMaker), defn);
     }
     addBlob(defn:string):GameEntity{
-      const e = this._entityMaker.makeBlob(defn);
-      this._entities.push(e);
-      return e;
+      return this.addUsing(this._entityMaker.makeBlob.bind(this._entityMaker), defn);
     }
     addBox(i){
-      const e = this._entityMaker.makeBox(i);
-      this._entities.push(e);
-      return e;
+      return this.addUsing(this._entityMaker.makeBox.bind(this._entityMaker), i);
     }
     addGround(){
-      const e = this._entityMaker.makeGround();
-      this._entities.push(e);
-      return e;
+      return this.addUsing(this._entityMaker.makeGround.bind(this._entityMaker));
     }
     destroyAll(){
       while(this._entities.length >= 1){

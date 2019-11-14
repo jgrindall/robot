@@ -2,10 +2,11 @@ import * as BABYLON from 'babylonjs';
 import {Object3D} from './components';
 
 class GameEntity {
-    private _entity: BABYLON.Mesh;
+    private _entity;
 
     constructor(entity) {
         this._entity = entity;
+        this.name = "ge";
     }
     setPosition(){
       //const mesh = this._entity.getComponent(Object3D).object;

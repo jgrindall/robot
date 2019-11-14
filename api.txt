@@ -1,0 +1,74 @@
+Pig
+
+setPos(x, y, z) getPos
+setVel(vx, vy, vz) getVel
+moveTo(x, y, z, time)
+moveForward(d, time)
+lookAt
+getDistTo
+rotate(axis, angle)
+update()
+getLookatTrans
+setTrans
+
+
+
+
+
+scene = yw.Scene()
+pig = yw.gameobjects.Pig()
+scene.add(pig)
+pig.setVelocity(0,10,0)
+
+
+
+scene.onUpdate = [update1, update2]
+pig.onUpdate = update3
+
+
+
+
+
+
+
+
+
+
+
+scene.onBeforeRender(){
+}
+
+class Pig{
+  setPos(){
+     mesh.x = x
+     mesh.y = y	 
+  }
+  setVel{
+  
+  }
+  setAppearance(){
+  
+  }
+  addUpdate(){
+  
+  }
+  
+}
+
+
+pig = Pig()
+
+
+
+
+
+
+components
+  transform
+  appearance
+  scripts
+  events
+  collision
+  mesh
+  
+  
